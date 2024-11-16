@@ -9,7 +9,7 @@ import { DrawerLinkItem } from "@/utils/ui/overlay/Drawer/DrawerLinkItem";
 import { useOverlayContent } from "@/utils/ui/overlay/useOverlayContent.hook";
 
 export const Header: FC = () => {
-  const { isOpen, handleOverlayOpen, handleOverlayClose } = useOverlayContent();
+  const { isOpen, overlayContentsRef, handleOverlayOpen, handleOverlayClose } = useOverlayContent();
   const id = useId();
   return (
     <header className="bg-emerald-500">
@@ -27,7 +27,7 @@ export const Header: FC = () => {
         >
           <HamburgerMenuIcon />
         </button>
-        <Drawer drawerContentsId={id} isOpen={isOpen} onClose={handleOverlayClose}>
+        <Drawer ref={overlayContentsRef} drawerContentsId={id} isOpen={isOpen} onClose={handleOverlayClose}>
           <DrawerLinkItem href="/pages">ページ</DrawerLinkItem>
           <DrawerLinkItem href="/parts">パーツ</DrawerLinkItem>
         </Drawer>
