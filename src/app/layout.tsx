@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
+import { Footer } from "@/utils/ui/structure/Footer";
 import { Header } from "@/utils/ui/structure/Header";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="mx-auto flex h-full min-h-dvh w-auto flex-col">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
