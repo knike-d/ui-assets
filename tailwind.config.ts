@@ -15,6 +15,14 @@ const config: Config = {
       height: {
         inherit: "inherit",
       },
+      zIndex: {
+        overlay: "calc(infinity - 100)",
+        "drawer-menu": "calc(infinity)",
+        "overlay-content": "calc(infinity)",
+      },
+      backgroundColor: {
+        overlay: "rgb(0 0 0 / 0.5);",
+      },
     },
   },
   plugins: [],
