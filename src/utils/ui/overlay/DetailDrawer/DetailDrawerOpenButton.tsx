@@ -1,4 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
+import { RightArrowIcon } from "@/utils/ui/Icon/RightArrowIcon";
 
 type Props = {
   isSelected: boolean;
@@ -13,6 +14,7 @@ export const DetailDrawerOpenButton = ({ isSelected, children, ...buttonProps }:
       type="button"
     >
       {children}
+      <RightArrowIcon className={`shrink-0 transition-transform duration-300 ${isSelected ? "-rotate-180" : ""}`} />
     </button>
   );
 };
