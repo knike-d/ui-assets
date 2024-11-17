@@ -9,9 +9,9 @@ type Props = {
 };
 
 export const DrawerLinkItem: FC<Props> = ({ children, ...props }) => {
-  const { isOpen } = useContext(DrawerContext);
+  const { isOpen, onClose } = useContext(DrawerContext);
   return (
-    <Link className="block w-full p-4" tabIndex={isOpen ? 0 : -1} {...props}>
+    <Link className="block w-full p-4" tabIndex={isOpen ? 0 : -1} onClick={onClose} {...props}>
       {children}
     </Link>
   );
