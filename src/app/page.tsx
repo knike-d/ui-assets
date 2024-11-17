@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TopPage } from "@/page/top/TopPage";
 
 export const metadata: Metadata = {
   title: "TOP",
@@ -6,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <main className="mx-auto flex w-full max-w-2xl flex-col items-center justify-between p-24" />;
+  return <TopPage />;
 }
