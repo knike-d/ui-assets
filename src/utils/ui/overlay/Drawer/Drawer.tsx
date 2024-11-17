@@ -12,6 +12,7 @@ import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlayContent.ho
 
 export const DrawerContext = createContext({
   isOpen: false,
+  onClose: () => {},
 });
 
 type Props = {
@@ -59,7 +60,7 @@ export const Drawer = forwardRef<OverlayContentsRef, Props>(function Drawer(
         >
           <CloseIcon />
         </button>
-        <DrawerContext.Provider value={{ isOpen }}>{children}</DrawerContext.Provider>
+        <DrawerContext.Provider value={{ isOpen, onClose }}>{children}</DrawerContext.Provider>
       </div>
     </>
   );
