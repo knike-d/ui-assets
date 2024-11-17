@@ -1,8 +1,9 @@
 "use client";
 import type { FC } from "react";
-import { useId } from "react";
+import { useId, useState } from "react";
 import { AreaSearchFormModal } from "@/features/searchForm/AreaSearchFormModal";
 import { SearchFormButton } from "@/features/searchForm/SearchFormButton";
+import type { SelectedArea } from "@/features/searchForm/searchForm.type";
 import { useOverlayContent } from "@/utils/ui/overlay/useOverlayContent.hook";
 
 export const AreaSearchForm: FC = () => {
@@ -10,6 +11,7 @@ export const AreaSearchForm: FC = () => {
   const modalId = `modal-${id}`;
 
   const { isOpen: isModalOpen, handleOverlayOpen, handleOverlayClose, overlayContentsRef } = useOverlayContent();
+  const [selectedArea] = useState<SelectedArea>();
 
   return (
     <>
@@ -23,6 +25,7 @@ export const AreaSearchForm: FC = () => {
         ref={overlayContentsRef}
         isModalOpen={isModalOpen}
         modalId={modalId}
+        selectedArea={selectedArea}
         onClose={handleOverlayClose}
       />
     </>
