@@ -1,17 +1,30 @@
 "use client";
 import type { FC } from "react";
+import { useId } from "react";
+import { AreaSearchFormModal } from "@/features/searchForm/AreaSearchFormModal";
 import { SearchFormButton } from "@/features/searchForm/SearchFormButton";
 import { useOverlayContent } from "@/utils/ui/overlay/useOverlayContent.hook";
 
 export const AreaSearchForm: FC = () => {
-  const { isOpen: isModalOpen, handleOverlayOpen } = useOverlayContent();
+  const id = useId();
+  const modalId = `modal-${id}`;
+
+  const { isOpen: isModalOpen, handleOverlayOpen, handleOverlayClose, overlayContentsRef } = useOverlayContent();
 
   return (
-    <SearchFormButton aria-expanded={!isModalOpen} onClick={handleOverlayOpen}>
-      <div className="flex">
-        <span className="w-20">エリア: </span>
-        <span className="text-gray-400">エリアを選択する</span>
-      </div>
-    </SearchFormButton>
+    <>
+      <SearchFormButton aria-controls={modalId} aria-expanded={!isModalOpen} onClick={handleOverlayOpen}>
+        <div className="flex">
+          <span className="mr-1 w-20 whitespace-nowrap">エリア:</span>
+          <span className="w-full text-gray-400">エリアを選択する</span>
+        </div>
+      </SearchFormButton>
+      <AreaSearchFormModal
+        ref={overlayContentsRef}
+        isModalOpen={isModalOpen}
+        modalId={modalId}
+        onClose={handleOverlayClose}
+      />
+    </>
   );
 };
