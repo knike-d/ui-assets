@@ -8,11 +8,11 @@ type Props = {
 
 export const UIAssetList: FC<Props> = ({ UIAssetList }) => {
   return (
-    <div className="flex w-full justify-center">
+    <div className="w-full">
       {UIAssetList.map((el) => (
-        <UIAssetCard key={el.href} href={el.href}>
-          {el.name}
-        </UIAssetCard>
+        <div key={el.href} className="mb-2 last:mb-0">
+          <UIAssetCard href={el.href}>{el.name}</UIAssetCard>
+        </div>
       ))}
     </div>
   );

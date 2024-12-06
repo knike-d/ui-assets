@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { AssetParts } from "@/features/uiAsset/uiAsset.const";
 import { AreaSearchFormPage } from "@/page/searchForm/AreaSearchFormPage";
 
 export const metadata: Metadata = {
-  title: "エリア検索フォーム",
-  description: "エリア検索フォーム",
+  title: AssetParts["area-search-form"].name,
+  description: AssetParts["area-search-form"].name,
 };
 
-export default function Home() {
+export default function AreaSearchForm() {
   return <AreaSearchFormPage />;
 }
