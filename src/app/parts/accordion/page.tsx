@@ -7,6 +7,6 @@ export const metadata: Metadata = {
   description: AssetParts.accordion.name,
 };
 
-export default function Home() {
+export default function Accordion() {
   return <AccordionPage />;
 }

@@ -7,6 +7,6 @@ export const metadata: Metadata = {
   description: AssetParts["area-search-form"].name,
 };
 
-export default function Home() {
+export default function AreaSearchForm() {
   return <AreaSearchFormPage />;
 }
