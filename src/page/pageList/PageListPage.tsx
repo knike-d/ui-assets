@@ -1,10 +1,8 @@
 import type { FC } from "react";
 import { UIAssetList } from "@/features/uiAsset/UIAssetList";
-import type { UIAssetCardModel } from "@/features/uiAsset/uiAsset.type";
+import { AssetPages } from "@/features/uiAsset/uiAsset.const";
 
-// const createPageLink = (path: string) => `/pages/${path}`;
-
-const PageList: UIAssetCardModel[] = [];
+const PageList = Object.values(AssetPages);
 
 export const PageListPage: FC = () => {
   return (

@@ -1,15 +1,8 @@
 import type { FC } from "react";
 import { UIAssetList } from "@/features/uiAsset/UIAssetList";
-import type { UIAssetCardModel } from "@/features/uiAsset/uiAsset.type";
+import { AssetParts } from "@/features/uiAsset/uiAsset.const";
 
-const createPartsLink = (path: string) => `/parts/${path}`;
-
-const PartsList: UIAssetCardModel[] = [
-  {
-    name: "エリア検索フォーム",
-    href: createPartsLink("area-search-form"),
-  },
-];
+const PartsList = Object.values(AssetParts);
 
 export const PartsListPage: FC = () => {
   return (
