@@ -1,5 +1,5 @@
 import type { FC, SVGProps } from "react";
-export const RightArrowIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const DownArrowIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     className="fill-black"
     height="1em"
@@ -8,6 +8,6 @@ export const RightArrowIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path d="M163.916 0 92.084 71.822l184.174 184.174L92.084 440.178 163.916 512l256-256.004z" />
+    <path d="m440.189 92.085-184.17 184.17L71.83 92.085 0 163.915l256.019 256 255.981-256z" />
   </svg>
 );

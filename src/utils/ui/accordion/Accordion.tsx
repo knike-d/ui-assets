@@ -1,6 +1,6 @@
 "use client";
 import type { FC, ReactNode } from "react";
-import { RightArrowIcon } from "@/utils/ui/Icon/RightArrowIcon";
+import { DownArrowIcon } from "@/utils/ui/Icon/DownArrowIcon";
 import { useAccordion } from "@/utils/ui/accordion/useAccordion";
 
 type Props = {
@@ -20,9 +20,7 @@ export const Accordion: FC<Props> = ({ title, children }) => {
         onClick={handleAccordionClick}
       >
         {title}
-        <RightArrowIcon
-          className={`ml-auto  transition-transform duration-300 ${isOpen ? "-rotate-90" : "rotate-90"}`}
-        />
+        <DownArrowIcon className={`ml-auto  transition-transform duration-300 ${isOpen ? "-rotate-180" : ""}`} />
       </button>
       <div ref={accordionRef} aria-hidden={!isOpen} className="h-0 w-full overflow-hidden" id="contents">
         {children}

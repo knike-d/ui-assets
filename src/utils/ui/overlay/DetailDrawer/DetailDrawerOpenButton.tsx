@@ -14,7 +14,9 @@ export const DetailDrawerOpenButton = ({ isSelected, children, ...buttonProps }:
       type="button"
     >
       {children}
-      <RightArrowIcon className={`shrink-0 transition-transform duration-300 ${isSelected ? "-rotate-180" : ""}`} />
+      <RightArrowIcon
+        className={`shrink-0 fill-black transition-transform duration-300 ${isSelected ? "-rotate-180" : ""}`}
+      />
     </button>
   );
 };

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { PageListPage } from "@/page/pageList/PageListPage";
+import { Footer } from "@/utils/ui/structure/Footer";
+import { Header } from "@/utils/ui/structure/Header";
 
 export const metadata: Metadata = {
   title: "ページ一覧",
@@ -7,5 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function PageList() {
-  return <PageListPage />;
+  return (
+    <>
+      <Header />
+      <PageListPage />
+      <Footer />
+    </>
+  );
 }

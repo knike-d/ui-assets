@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { TopPage } from "@/page/top/TopPage";
+import { Footer } from "@/utils/ui/structure/Footer";
+import { Header } from "@/utils/ui/structure/Header";
 
 export const metadata: Metadata = {
   title: "TOP",
@@ -7,5 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <TopPage />;
+  return (
+    <>
+      <Header />
+      <TopPage />
+      <Footer />
+    </>
+  );
 }
