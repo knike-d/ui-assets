@@ -1,9 +1,15 @@
 import type { UIAssetCardModel } from "@/features/uiAsset/uiAsset.type";
 
-// const createPageLink = (path: string) => `/pages/${path}`;
+const createPageLink = (path: string) => `/pages/${path}`;
 const createPartsLink = (path: string) => `/parts/${path}`;
 
-export const AssetPages: Record<string, UIAssetCardModel> = {};
+type PageName = "message-list";
+export const AssetPages: Record<PageName, UIAssetCardModel> = {
+  "message-list": {
+    name: "メッセージリストページ",
+    href: createPageLink("message/list"),
+  },
+};
 
 type PartsName = "area-search-form" | "accordion";
 export const AssetParts: Record<PartsName, UIAssetCardModel> = {
