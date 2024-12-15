@@ -11,6 +11,9 @@ const config: Config = {
       width: {
         "200p": "200%",
       },
+      maxWidth: {
+        "80p": "80%",
+      },
       height: {
         inherit: "inherit",
       },

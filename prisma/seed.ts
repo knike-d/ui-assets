@@ -9,6 +9,13 @@ async function main() {
       data: Array.from([...Array(3)]).map((_, i) => ({ name: `店舗${i + 1}` })),
     });
   }
+
+  const existsUser = await prisma.user.findFirst();
+  if (!existsUser) {
+    await prisma.user.createMany({
+      data: Array.from([...Array(1)]).map((_, i) => ({ name: `ユーザー${i + 1}` })),
+    });
+  }
 }
 
 main()

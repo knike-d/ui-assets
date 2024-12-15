@@ -21,7 +21,7 @@ export const MessageDetailPageHeader: FC<Props> = ({ storeId }) => {
   };
 
   return (
-    <header className="bg-gray-200">
+    <header className="w-full border-b bg-white">
       <nav className="flex h-12 items-center font-bold">
         <button className="flex h-inherit items-center px-4" type="button" onClick={handleBackButton}>
           <LeftArrowIcon />
