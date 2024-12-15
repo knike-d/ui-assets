@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useLayoutEffect, useRef, type FC } from "react";
+import { MessageDetailCardSwitcher } from "@/features/message/messageDetail/MessageDetailCardSwitcher";
 import { MESSAGE_DETAIL_FETCH_LIMIT, useFetchMessageDetail } from "@/features/message/useFetchMessageDetail";
 import { useInViewTrigger } from "@/utils/hooks/interaction/useInViewTrigger";
 import { Spinner } from "@/utils/ui/loading/Spinner";
@@ -34,7 +35,9 @@ export const MessageDetail: FC<Props> = ({ storeId }) => {
       className="flex w-full max-w-2xl flex-1 flex-col-reverse overflow-auto border p-2 shadow-md"
     >
       {messages.map((el) => (
-        <li key={el.id}>{el.content}</li>
+        <li key={el.id} className="mb-2">
+          <MessageDetailCardSwitcher message={el} />
+        </li>
       ))}
       <li className="m-3 mb-auto grid place-items-center">{isValidating ? <Spinner /> : triggerElement}</li>
     </ul>
