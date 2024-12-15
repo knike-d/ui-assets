@@ -7,7 +7,7 @@ type Props = {
 
 export const MessageDetailPage: FC<Props> = ({ storeId }) => {
   return (
-    <main className="flex max-h-dvh flex-col">
+    <main className="flex h-dvh max-h-dvh flex-col items-center">
       <MessageDetailPageHeader storeId={storeId} />
     </main>
   );
