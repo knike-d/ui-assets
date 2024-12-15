@@ -34,13 +34,14 @@ export const MessageDetailForm: FC<Props> = ({ storeId }) => {
       }
     }
   };
+  const disabledSubmit = isMutating;
 
   return (
     <div className="flex w-full max-w-2xl items-end bg-white shadow-md">
       <MessageDetailFormInput disabled={isMutating} inputText={inputText} onChangeTextarea={handleChangeTextarea} />
       <button
-        className="h-12 whitespace-nowrap rounded bg-blue-700 p-3 text-white hover:bg-blue-800"
-        disabled={isMutating}
+        className={`h-12 whitespace-nowrap rounded  p-3 text-white  ${disabledSubmit ? "bg-blue-500" : "bg-blue-700 hover:bg-blue-800"}`}
+        disabled={disabledSubmit}
         type="button"
         onClick={handleSubmit}
       >
