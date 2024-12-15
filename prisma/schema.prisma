@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [uuidOssp(map: "uuid-ossp")]
+}
+
+model Store {
+  id                String              @id @default(dbgenerated("uuid_generate_v4()"))
+  name              String
+  StoreUserMessage StoreUserMessage[]
+}
+
+model User {
+  id                String              @id @default(dbgenerated("uuid_generate_v4()"))
+  name              String
+  StoreUserMessage StoreUserMessage[]
+}
+
+model StoreUserMessage {
+  id          String      @id @default(dbgenerated("uuid_generate_v4()"))
+  storeId     String
+  userId      String
+  senderType  SenderType
+  messageType MessageType
+  content     String?     @db.Text
+  mediaUrl    String?     @db.VarChar(2083)
+  isRead      Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+
+  store Store @relation(fields: [storeId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@index([storeId, userId])
+  @@index([createdAt])
+}
+
+enum SenderType {
+  store
+  user
+  system
+}
+
+enum MessageType {
+  text
+  image
+  file
+  system
+}

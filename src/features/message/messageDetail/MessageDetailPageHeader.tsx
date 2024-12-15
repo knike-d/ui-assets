@@ -1,21 +1,32 @@
 "use client";
 
-import type { FC } from "react";
-import { useId } from "react";
-import Link from "next/link";
+import { useId, type FC } from "react";
+import { useFetchStore } from "@/features/store/useFetchStore";
 import { HamburgerMenuIcon } from "@/utils/ui/Icon/HamburgerMenuIcon";
+import { LeftArrowIcon } from "@/utils/ui/Icon/LeftArrowIcon";
 import { CommonDrawer } from "@/utils/ui/overlay/Drawer/CommonDrawer";
 import { useOverlayContent } from "@/utils/ui/overlay/useOverlayContent.hook";
 
-export const Header: FC = () => {
+type Props = {
+  storeId: string;
+};
+
+export const MessageDetailPageHeader: FC<Props> = ({ storeId }) => {
+  const { data } = useFetchStore(storeId);
   const { isOpen, overlayContentsRef, handleOverlayOpen, handleOverlayClose } = useOverlayContent();
   const id = useId();
+
+  const handleBackButton = () => {
+    history.back();
+  };
+
   return (
-    <header className="bg-emerald-500">
-      <nav className="flex h-12 items-center font-bold text-white">
-        <Link className="mr-auto flex h-inherit items-center px-5" href="/">
-          Home
-        </Link>
+    <header className="w-full border-b bg-white">
+      <nav className="flex h-12 items-center font-bold">
+        <button className="flex h-inherit items-center px-4" type="button" onClick={handleBackButton}>
+          <LeftArrowIcon />
+        </button>
+        <span className="mr-auto">{data?.name}</span>
         <button
           aria-controls={id}
           aria-expanded={isOpen}
@@ -24,7 +35,7 @@ export const Header: FC = () => {
           type="button"
           onClick={handleOverlayOpen}
         >
-          <HamburgerMenuIcon />
+          <HamburgerMenuIcon className="fill-black" />
         </button>
         <CommonDrawer ref={overlayContentsRef} drawerContentsId={id} isOpen={isOpen} onClose={handleOverlayClose} />
       </nav>
