@@ -36,3 +36,37 @@ export const GET = async (req: NextRequest, { params }: Params) => {
 
   return NextResponse.json(data, { status: 200 });
 };
+
+export const POST = async (req: NextRequest, { params }: Params) => {
+  const { storeId } = await params;
+
+  const store = await prisma.store.findFirst({ where: { id: storeId } });
+  if (!store) {
+    return NextResponse.json({}, { status: 500 });
+  }
+
+  // TODO: ログイン機能実装後に修正
+  const user = await prisma.user.findFirst();
+
+  const formData = await req.formData();
+  const message = formData.get("message");
+
+  if (user) {
+    if (typeof message === "string") {
+      await prisma.storeUserMessage.create({
+        data: {
+          storeId,
+          userId: user.id,
+          content: message,
+          isRead: true,
+          messageType: "text",
+          senderType: "user",
+        },
+      });
+
+      return NextResponse.json({}, { status: 200 });
+    }
+  }
+
+  return NextResponse.json({}, { status: 500 });
+};

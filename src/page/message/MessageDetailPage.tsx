@@ -12,7 +12,7 @@ export const MessageDetailPage: FC<Props> = ({ storeId }) => {
     <main className="flex h-dvh max-h-dvh flex-col items-center">
       <MessageDetailPageHeader storeId={storeId} />
       <MessageDetail storeId={storeId} />
-      <MessageDetailForm />
+      <MessageDetailForm storeId={storeId} />
     </main>
   );
 };

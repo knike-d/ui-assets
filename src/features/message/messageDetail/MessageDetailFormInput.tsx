@@ -3,10 +3,11 @@ import { type FC } from "react";
 
 type Props = {
   inputText: string;
+  disabled: boolean;
   onChangeTextarea: (text: string) => void;
 };
 
-export const MessageDetailFormInput: FC<Props> = ({ inputText, onChangeTextarea }) => {
+export const MessageDetailFormInput: FC<Props> = ({ inputText, disabled, onChangeTextarea }) => {
   const handleChangeTextarea = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     onChangeTextarea(event.target.value);
   };
@@ -20,6 +21,7 @@ export const MessageDetailFormInput: FC<Props> = ({ inputText, onChangeTextarea 
         >{`${inputText}\u200b`}</div>
         <textarea
           className="absolute inset-y-0 max-h-40 min-h-10 w-full resize-none border px-3 py-2"
+          disabled={disabled}
           placeholder="メッセージを入力"
           value={inputText}
           onChange={handleChangeTextarea}
