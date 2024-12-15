@@ -9,9 +9,10 @@ import {
 
 type Props = {
   storeId: string;
+  onSubmit: () => void;
 };
 
-export const MessageDetailForm: FC<Props> = ({ storeId }) => {
+export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
   const [inputText, setInputText] = useState("");
   const { trigger, isMutating } = usePostMessage(storeId);
   const { mutate } = useFetchMessageDetail(storeId);
@@ -31,6 +32,7 @@ export const MessageDetailForm: FC<Props> = ({ storeId }) => {
 
     try {
       await optimisticUpdate({ inputText });
+      onSubmit();
       await trigger(formData);
       await mutate();
       setInputText("");

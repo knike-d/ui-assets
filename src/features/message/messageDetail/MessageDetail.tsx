@@ -1,6 +1,8 @@
 "use client";
 
-import { useCallback, useLayoutEffect, useRef, type FC } from "react";
+import type { ForwardedRef, ReactElement } from "react";
+import { forwardRef, useCallback, useImperativeHandle, useLayoutEffect, useRef } from "react";
+import type { MessageDetailRef } from "@/features/message/message.type";
 import { MessageDetailCardSwitcher } from "@/features/message/messageDetail/MessageDetailCardSwitcher";
 import { MESSAGE_DETAIL_FETCH_LIMIT, useFetchMessageDetail } from "@/features/message/useFetchMessageDetail";
 import { useInViewTrigger } from "@/utils/hooks/interaction/useInViewTrigger";
@@ -10,7 +12,10 @@ type Props = {
   storeId: string;
 };
 
-export const MessageDetail: FC<Props> = ({ storeId }) => {
+export const MessageDetail = forwardRef(function MessageDetail(
+  { storeId }: Props,
+  ref: ForwardedRef<MessageDetailRef>,
+): ReactElement {
   const { data: messageDetail, isValidating, isLoading, setSize } = useFetchMessageDetail(storeId);
   const messages = messageDetail?.map((el) => el.slice()).flat() || [];
   const isLastData = !!messageDetail && (messageDetail.slice(-1)[0]?.length || 0) < MESSAGE_DETAIL_FETCH_LIMIT;
@@ -23,6 +28,12 @@ export const MessageDetail: FC<Props> = ({ storeId }) => {
   });
 
   const messageDetailRef = useRef<HTMLUListElement>(null);
+  useImperativeHandle(ref, () => ({
+    scrollToBottom: () => {
+      messageDetailRef.current?.scrollBy(0, messageDetailRef.current.scrollHeight);
+    },
+  }));
+
   useLayoutEffect(() => {
     if (!isLoading) {
       messageDetailRef.current?.scrollIntoView(false);
@@ -43,4 +54,4 @@ export const MessageDetail: FC<Props> = ({ storeId }) => {
       <li className="m-3 grid place-items-center first:mb-auto">{!isLastData ? <Spinner /> : null}</li>
     </ul>
   );
-};
+});
