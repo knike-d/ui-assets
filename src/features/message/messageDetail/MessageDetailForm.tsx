@@ -1,7 +1,11 @@
 "use client";
 import { useState, type FC } from "react";
 import { MessageDetailFormInput } from "@/features/message/messageDetail/MessageDetailFormInput";
-import { useFetchMessageDetail, usePostMessage } from "@/features/message/useFetchMessageDetail";
+import {
+  useFetchMessageDetail,
+  useOptimisticUpdateMessageDetail,
+  usePostMessage,
+} from "@/features/message/useFetchMessageDetail";
 
 type Props = {
   storeId: string;
@@ -11,6 +15,7 @@ export const MessageDetailForm: FC<Props> = ({ storeId }) => {
   const [inputText, setInputText] = useState("");
   const { trigger, isMutating } = usePostMessage(storeId);
   const { mutate } = useFetchMessageDetail(storeId);
+  const { optimisticUpdate, rollbackData } = useOptimisticUpdateMessageDetail(storeId);
 
   const handleChangeTextarea = (text: string): void => {
     setInputText(text);
@@ -25,12 +30,14 @@ export const MessageDetailForm: FC<Props> = ({ storeId }) => {
     formData.append("message", inputText);
 
     try {
+      await optimisticUpdate({ inputText });
       await trigger(formData);
       await mutate();
       setInputText("");
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
+        await rollbackData();
       }
     }
   };

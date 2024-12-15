@@ -35,7 +35,7 @@ export const MessageDetail: FC<Props> = ({ storeId }) => {
       className="flex w-full max-w-2xl flex-1 flex-col-reverse overflow-auto border p-2 shadow-md"
     >
       {messages.map((el) => (
-        <li key={el.id} className="mb-2">
+        <li key={el.id} className={`mb-2 ${el.isOptimistic ? "opacity-60" : ""}`}>
           <MessageDetailCardSwitcher message={el} />
         </li>
       ))}
