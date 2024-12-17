@@ -32,8 +32,6 @@ export const createMessage = async (messageProperties?: Partial<StoreUserMessage
 };
 
 export const renderApp = async (ui: ReactNode, renderOptions: RenderOptions = {}) => {
-  const userEvent = _userEvent.setup();
-
   const returnValue = {
     ...rtlRender(ui, {
       wrapper: TestSWRProvider,
@@ -41,8 +39,9 @@ export const renderApp = async (ui: ReactNode, renderOptions: RenderOptions = {}
     }),
   };
 
-  return { userEvent, ...returnValue };
+  return returnValue;
 };
 
+const userEvent = _userEvent.setup();
 export * from "@testing-library/react";
-export { rtlRender };
+export { rtlRender, userEvent };
