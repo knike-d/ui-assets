@@ -50,6 +50,7 @@ export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
       <MessageDetailFormInput disabled={isMutating} inputText={inputText} onChangeTextarea={handleChangeTextarea} />
       <button
         className={`h-12 whitespace-nowrap rounded  p-3 text-white  ${disabledSubmit ? "bg-blue-500" : "bg-blue-700 hover:bg-blue-800"}`}
+        data-testid="message-submit-button"
         disabled={disabledSubmit}
         type="button"
         onClick={handleSubmit}

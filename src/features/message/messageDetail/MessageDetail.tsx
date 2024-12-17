@@ -46,7 +46,11 @@ export const MessageDetail = forwardRef(function MessageDetail(
       className="flex w-full max-w-2xl flex-1 flex-col-reverse overflow-auto border p-2 shadow-md"
     >
       {messages.map((el) => (
-        <li key={el.id} className={`mb-2 first:mb-auto ${el.isOptimistic ? "opacity-60" : ""}`}>
+        <li
+          key={el.id}
+          className={`mb-2 first:mb-auto ${el.isOptimistic ? "opacity-60" : ""}`}
+          data-testid={`${el.isOptimistic ? "optimistic-" : ""}message-card`}
+        >
           <MessageDetailCardSwitcher message={el} />
         </li>
       ))}
