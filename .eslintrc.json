@@ -5,7 +5,9 @@
     "plugin:jsx-a11y/recommended",
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
-    "prettier"
+    "prettier",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
   ],
   "plugins": ["@typescript-eslint", "unused-imports"],
   "parser": "@typescript-eslint/parser",
