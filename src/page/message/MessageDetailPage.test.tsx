@@ -40,7 +40,7 @@ const testSubmit = async () => {
 describe("メッセージ詳細ページ", () => {
   describe("送信機能", () => {
     describe("送信に成功したとき", () => {
-      test("楽観的更新用のメッセージが再検証されたメッセージで上書きされる", async () => {
+      test("送信中は楽観的更新によるメッセージが表示され、再検証後に更新される", async () => {
         await testSubmit();
 
         await waitForElementToBeRemoved(() => screen.queryByTestId(OPTIMISTIC_MESSAGE_ID), {
