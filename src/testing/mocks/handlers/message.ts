@@ -62,3 +62,10 @@ export const messageHandlers = [
     return HttpResponse.json(null, { status: 500 });
   }),
 ];
+
+export const messageErrorHandler = {
+  messageSubmit: http.post(endpoint.messageDetail, async () => {
+    await networkDelay();
+    return HttpResponse.json(null, { status: 500 });
+  }),
+};

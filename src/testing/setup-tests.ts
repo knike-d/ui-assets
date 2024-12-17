@@ -2,6 +2,7 @@ import "@testing-library/jest-dom/vitest";
 
 import { initializeDb, resetDb } from "@/testing/mocks/db";
 import { server } from "@/testing/mocks/server";
+import { cleanup } from "@/testing/test-utils";
 
 beforeAll(() => {
   server.listen({ onUnhandledRequest: "error" });
@@ -20,5 +21,6 @@ beforeEach(() => {
 });
 afterEach(() => {
   server.resetHandlers();
+  cleanup();
   resetDb();
 });
