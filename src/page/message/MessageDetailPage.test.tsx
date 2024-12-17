@@ -30,10 +30,8 @@ const testSubmit = async () => {
   await userEvent.type(textarea, TEST_MESSAGE);
   await userEvent.click(submitButton);
 
-  await waitFor(async () => {
-    const optimisticMessage = await screen.findByTestId(OPTIMISTIC_MESSAGE_ID);
-    expect(optimisticMessage).toHaveTextContent(TEST_MESSAGE);
-  });
+  const optimisticMessage = await screen.findByTestId(OPTIMISTIC_MESSAGE_ID);
+  expect(optimisticMessage).toHaveTextContent(TEST_MESSAGE);
 };
 
 describe("メッセージ詳細ページ", () => {
