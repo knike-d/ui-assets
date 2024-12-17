@@ -24,7 +24,7 @@ const models = {
     senderType: String,
     messageType: String,
     isRead: Boolean,
-    createdAt: String,
+    createdAt: Date,
   },
 };
 
