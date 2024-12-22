@@ -1,0 +1,30 @@
+model StoreUserMessage {
+  id          String      @id @default(dbgenerated("uuid_generate_v4()"))
+  storeId     String
+  userId      String
+  senderType  SenderType
+  messageType MessageType
+  content     String?     @db.Text
+  mediaUrl    String?     @db.VarChar(2083)
+  isRead      Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+
+  store Store @relation(fields: [storeId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@index([storeId, userId])
+  @@index([createdAt])
+}
+
+enum SenderType {
+  store
+  user
+  system
+}
+
+enum MessageType {
+  text
+  image
+  file
+  system
+}
