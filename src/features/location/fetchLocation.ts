@@ -1,11 +1,19 @@
-import { NextResponse } from "next/server";
-import { locations } from "@/app/api/location/location.const";
-import type { AreaSelect, City, Region } from "@/features/location/location.type";
+import { PrismaClient, type City } from "@prisma/client";
+import type { AreaSelect, RegionWithPrefecturesAndCities } from "@/features/location/location.type";
 
-export const GET = async (req: Request) => {
-  const { searchParams } = new URL(req.url);
-  const res = searchParams.get("isGrouped") ? groupCities(locations) : locations;
-  return NextResponse.json(res, { status: 200 });
+const prisma = new PrismaClient();
+
+export const fetchAreaSelectLocations = async (): Promise<AreaSelect.Region[]> => {
+  const regions = await prisma.region.findMany({
+    include: {
+      prefectures: {
+        include: {
+          cities: true,
+        },
+      },
+    },
+  });
+  return groupCities(regions);
 };
 
 const getKanaGroup = (kana: string): string => {
@@ -23,7 +31,7 @@ const getKanaGroup = (kana: string): string => {
   return "その他";
 };
 
-const groupCities = (locations: Region[]): AreaSelect.Region[] => {
+const groupCities = (locations: RegionWithPrefecturesAndCities[]): AreaSelect.Region[] => {
   return locations.map((location) => {
     const prefectures = location.prefectures.map((prefecture) => {
       const groupedCitiesMap = prefecture.cities.reduce(

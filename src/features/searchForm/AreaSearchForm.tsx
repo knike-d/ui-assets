@@ -1,12 +1,17 @@
 "use client";
 import type { FC } from "react";
 import { useId, useState } from "react";
+import type { AreaSelect } from "@/features/location/location.type";
 import { AreaSearchFormModal } from "@/features/searchForm/AreaSearchFormModal";
 import { SearchFormButton } from "@/features/searchForm/SearchFormButton";
 import type { SelectedArea } from "@/features/searchForm/searchForm.type";
 import { useOverlayContent } from "@/utils/ui/overlay/useOverlayContent.hook";
 
-export const AreaSearchForm: FC = () => {
+type Props = {
+  locations: AreaSelect.Region[];
+};
+
+export const AreaSearchForm: FC<Props> = ({ locations }) => {
   const id = useId();
   const modalId = `modal-${id}`;
 
@@ -30,6 +35,7 @@ export const AreaSearchForm: FC = () => {
       <AreaSearchFormModal
         ref={overlayContentsRef}
         isModalOpen={isModalOpen}
+        locations={locations}
         modalId={modalId}
         selectedArea={selectedArea}
         onClose={handleOverlayClose}

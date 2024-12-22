@@ -1,6 +1,4 @@
-import type { Region } from "@/features/location/location.type";
-
-export const locations: Region[] = [
+export const locations = [
   {
     id: "7187b4f1-edfb-4eeb-a714-4aff9c7db7f0",
     region: "北海道",
