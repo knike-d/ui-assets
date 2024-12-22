@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import useSWRInfinite from "swr/infinite";
 import useSWRMutation from "swr/mutation";
 import type { StoreUserMessage } from "@/features/message/message.type";
+import { customFetch } from "@/utils/functions/fetchManager";
 
 export const MESSAGE_DETAIL_FETCH_LIMIT = 20;
 
@@ -28,19 +29,10 @@ export const useFetchMessageDetail = (storeId: string) => {
 
 export const usePostMessage = (storeId: string) => {
   return useSWRMutation(`${url.messages}/${storeId}`, async (url, { arg }: Record<"arg", FormData>) => {
-    return fetch(url, {
+    return customFetch(url, {
       method: "POST",
       body: arg,
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("メッセージの送信に失敗しました。時間を空けてから再度お試しください。");
-        }
-        return res.json();
-      })
-      .catch(() => {
-        throw new Error("メッセージの送信に失敗しました。時間を空けてから再度お試しください。");
-      });
+    });
   });
 };
 

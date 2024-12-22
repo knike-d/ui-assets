@@ -1,6 +1,7 @@
 "use client";
 import type { FC, ReactNode } from "react";
 import { SWRConfig } from "swr";
+import { customFetch } from "@/utils/functions/fetchManager";
 
 type Props = {
   children: ReactNode;
@@ -13,7 +14,7 @@ export const SWRProvider: FC<Props> = ({ children }) => {
         errorRetryCount: 1,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
-        fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+        fetcher: (resource, init) => customFetch(resource, init),
       }}
     >
       {children}
