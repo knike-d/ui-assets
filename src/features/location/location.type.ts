@@ -1,22 +1,9 @@
-export type Region = {
-  id: string;
-  region: string;
-  prefectures: Prefecture[];
-};
+import type { City, Prefecture, Region } from "@prisma/client";
 
-export type Prefecture = {
-  id: string;
-  slug: string;
-  kana: string;
-  name: string;
-  cities: City[];
-};
-
-export type City = {
-  id: string;
-  code: number;
-  kana: string;
-  name: string;
+export type RegionWithPrefecturesAndCities = Region & {
+  prefectures: (Prefecture & {
+    cities: City[];
+  })[];
 };
 
 export namespace AreaSelect {

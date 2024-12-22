@@ -1,8 +1,7 @@
 "use client";
 import type { ForwardedRef, ReactElement } from "react";
 import { forwardRef, useId, useState } from "react";
-import type { AreaSelect, City } from "@/features/location/location.type";
-import { useFetchAreaSelectLocation } from "@/features/location/useFetchLocation.hook";
+import type { AreaSelect } from "@/features/location/location.type";
 import type { SelectedArea } from "@/features/searchForm/searchForm.type";
 import { AbsoluteOverlay } from "@/utils/ui/overlay/AbsoluteOverlay";
 import { DetailDrawer } from "@/utils/ui/overlay/DetailDrawer/DetailDrawer";
@@ -10,21 +9,21 @@ import { DetailDrawerListItemButton } from "@/utils/ui/overlay/DetailDrawer/Deta
 import { DetailDrawerOpenButton } from "@/utils/ui/overlay/DetailDrawer/DetailDrawerOpenButton";
 import { BottomModal } from "@/utils/ui/overlay/Modal/BottomModal";
 import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlayContent.hook";
+import type { City } from "@prisma/client";
 
 type Props = {
   modalId: string;
   isModalOpen: boolean;
   selectedArea: SelectedArea | undefined;
+  locations: AreaSelect.Region[];
   onSelect: (selectedArea: SelectedArea) => void;
   onClose: () => void;
 };
 
 export const AreaSearchFormModal = forwardRef(function AreaSearchFormModal(
-  { modalId, isModalOpen, selectedArea, onSelect, onClose }: Props,
+  { modalId, isModalOpen, selectedArea, locations, onSelect, onClose }: Props,
   ref: ForwardedRef<OverlayContentsRef>,
 ): ReactElement {
-  const { data } = useFetchAreaSelectLocation();
-
   const id = useId();
   const citiesDrawerId = `cities-drawer-${id}`;
 
@@ -68,7 +67,7 @@ export const AreaSearchFormModal = forwardRef(function AreaSearchFormModal(
         <div className={`w-full ${selectedTempPref ? "overflow-hidden" : "overflow-y-auto overscroll-y-contain"}`}>
           <div className="relative">
             <AbsoluteOverlay isOpen={isDrawerOpen} onClose={handlePrefSelectCancel} />
-            {data?.map((el) => (
+            {locations?.map((el) => (
               <div key={el.id} className="w-full">
                 <p className="sticky top-0 z-10 w-full bg-gray-300 px-2 font-bold">{el.region}</p>
                 {el.prefectures.map((pref) => {

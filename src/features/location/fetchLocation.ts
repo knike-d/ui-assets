@@ -1,14 +1,9 @@
-import { PrismaClient, type City, type Prefecture, type Region } from "@prisma/client";
+import { PrismaClient, type City } from "@prisma/client";
+import type { AreaSelect, RegionWithPrefecturesAndCities } from "@/features/location/location.type";
 
 const prisma = new PrismaClient();
 
-export type RegionWithPrefecturesAndCities = Region & {
-  prefectures: (Prefecture & {
-    cities: City[];
-  })[];
-};
-
-export const fetchAreaSelectLocations = async () => {
+export const fetchAreaSelectLocations = async (): Promise<AreaSelect.Region[]> => {
   const regions = await prisma.region.findMany({
     include: {
       prefectures: {
@@ -36,7 +31,7 @@ const getKanaGroup = (kana: string): string => {
   return "その他";
 };
 
-const groupCities = (locations: RegionWithPrefecturesAndCities[]) => {
+const groupCities = (locations: RegionWithPrefecturesAndCities[]): AreaSelect.Region[] => {
   return locations.map((location) => {
     const prefectures = location.prefectures.map((prefecture) => {
       const groupedCitiesMap = prefecture.cities.reduce(
