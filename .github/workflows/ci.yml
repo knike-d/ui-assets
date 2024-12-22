@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: ["*"]
+    paths-ignore:
+      - "README.md"
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - "README.md"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        id: setup_node
+        with:
+          node-version: 20
+
+      - name: Module Cache Dependency
+        uses: actions/cache@v4
+        id: module_cache_dependency
+        with:
+          path: node_modules
+          key: ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.setup_node.outputs.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Npm Cache Dependency
+        uses: actions/cache@v4
+        if: steps.module_cache_dependency.outputs.cache-hit != 'true'
+        with:
+          path: ~/.npm
+          key: ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.setup_node.outputs.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.setup_node.outputs.node-version }}-npm-
+
+      - name: Install dependencies
+        if: steps.module_cache_dependency.outputs.cache-hit != 'true'
+        run: npm ci --no-audit --progress=false --silent
+
+      - name: Check Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
