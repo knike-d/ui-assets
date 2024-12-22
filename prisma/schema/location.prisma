@@ -1,0 +1,24 @@
+model Region {
+  id          String       @id @default(dbgenerated("uuid_generate_v4()"))
+  region      String
+  prefectures Prefecture[]
+}
+
+model Prefecture {
+  id       String @id @default(dbgenerated("uuid_generate_v4()"))
+  slug     String
+  kana     String
+  name     String
+  regionId String
+  region   Region @relation(fields: [regionId], references: [id])
+  cities   City[]
+}
+
+model City {
+  id           String     @id @default(dbgenerated("uuid_generate_v4()"))
+  code         Int
+  kana         String
+  name         String
+  prefecture   Prefecture @relation(fields: [prefectureId], references: [id])
+  prefectureId String
+}
