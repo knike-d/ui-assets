@@ -9,12 +9,9 @@ export const customFetch = async <Res>(input: RequestInfo | URL, init?: RequestI
         const isPostRequest = init?.method?.toUpperCase() === "POST";
         const errorMessage = isPostRequest ? FetchErrorMessage.PostFailed : FetchErrorMessage.FetchFailed;
 
-        const customError: CustomError = {
-          ...new Error(errorMessage),
-          method: init?.method,
-        };
-
-        throw customError;
+        const error: CustomError = new Error(errorMessage);
+        error.method = init?.method;
+        throw error;
       }
       return res.json() as Promise<Res>;
     })
