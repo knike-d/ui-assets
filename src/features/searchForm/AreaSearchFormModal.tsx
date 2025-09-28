@@ -1,6 +1,6 @@
 "use client";
-import type { ForwardedRef, ReactElement } from "react";
-import { forwardRef, useId, useState } from "react";
+import type { FC, ForwardedRef } from "react";
+import { useId, useState } from "react";
 import type { AreaSelect } from "@/features/location/location.type";
 import type { SelectedArea } from "@/features/searchForm/searchForm.type";
 import { AbsoluteOverlay } from "@/utils/ui/overlay/AbsoluteOverlay";
@@ -18,12 +18,18 @@ type Props = {
   locations: AreaSelect.Region[];
   onSelect: (selectedArea: SelectedArea) => void;
   onClose: () => void;
+  ref: ForwardedRef<OverlayContentsRef>;
 };
 
-export const AreaSearchFormModal = forwardRef(function AreaSearchFormModal(
-  { modalId, isModalOpen, selectedArea, locations, onSelect, onClose }: Props,
-  ref: ForwardedRef<OverlayContentsRef>,
-): ReactElement {
+export const AreaSearchFormModal: FC<Props> = ({
+  modalId,
+  isModalOpen,
+  selectedArea,
+  locations,
+  onSelect,
+  onClose,
+  ref,
+}) => {
   const id = useId();
   const citiesDrawerId = `cities-drawer-${id}`;
 
@@ -109,4 +115,4 @@ export const AreaSearchFormModal = forwardRef(function AreaSearchFormModal(
       </div>
     </BottomModal>
   );
-});
+};

@@ -1,8 +1,9 @@
+import type { ReactElement } from "react";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import type { IntersectionOptions } from "react-intersection-observer";
 
-export const useInViewTrigger = (onInView: () => void, option: IntersectionOptions): JSX.Element => {
+export const useInViewTrigger = (onInView: () => void, option: IntersectionOptions): ReactElement => {
   const { ref, inView } = useInView(option);
   useEffect(() => {
     if (inView) {

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useContext, type ComponentProps, type ReactNode } from "react";
+import { use, type ComponentProps, type ReactNode } from "react";
 import Link from "next/link";
 import { DrawerContext } from "@/utils/ui/overlay/Drawer/Drawer";
 
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const DrawerLinkItem: FC<Props> = ({ children, ...props }) => {
-  const { isOpen, onClose } = useContext(DrawerContext);
+  const { isOpen, onClose } = use(DrawerContext);
   return (
     <Link className="block w-full p-4" tabIndex={isOpen ? 0 : -1} onClick={onClose} {...props}>
       {children}
