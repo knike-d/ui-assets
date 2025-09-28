@@ -58,7 +58,7 @@ export const Drawer: FC<Props> = ({ drawerContentsId, isOpen, onClose, children,
         >
           <CloseIcon />
         </button>
-        <DrawerContext.Provider value={{ isOpen, onClose }}>{children}</DrawerContext.Provider>
+        <DrawerContext value={{ isOpen, onClose }}>{children}</DrawerContext>
       </div>
     </>
   );
