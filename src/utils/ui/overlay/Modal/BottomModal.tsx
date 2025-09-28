@@ -1,6 +1,7 @@
 "use client";
-import type { ForwardedRef, ReactElement, ReactNode } from "react";
-import { forwardRef, useImperativeHandle, useRef } from "react";
+
+import type { FC, ForwardedRef, ReactNode } from "react";
+import { useImperativeHandle, useRef } from "react";
 import { FOCUSABLE_ELEMENTS } from "@/utils/constants/accessibility/focusableElements";
 import { useFocusTrap } from "@/utils/hooks/accessibility/useFocusTrap.hook";
 import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent.hook";
@@ -14,12 +15,10 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  ref: ForwardedRef<OverlayContentsRef>;
 };
 
-export const BottomModal = forwardRef(function Modal(
-  { modalId, isOpen, onClose, children }: Props,
-  ref: ForwardedRef<OverlayContentsRef>,
-): ReactElement {
+export const BottomModal: FC<Props> = ({ modalId, isOpen, onClose, children, ref }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   useImperativeHandle(ref, () => ({
     focusFirstElement: () => {
@@ -58,4 +57,4 @@ export const BottomModal = forwardRef(function Modal(
       </div>
     </>
   );
-});
+};

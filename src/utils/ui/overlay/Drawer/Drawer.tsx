@@ -1,7 +1,7 @@
 "use client";
 
-import type { ReactElement, ReactNode } from "react";
-import { createContext, forwardRef, useImperativeHandle, useRef } from "react";
+import type { FC, ForwardedRef, ReactNode } from "react";
+import { createContext, useImperativeHandle, useRef } from "react";
 import { FOCUSABLE_ELEMENTS } from "@/utils/constants/accessibility/focusableElements";
 import { useFocusTrap } from "@/utils/hooks/accessibility/useFocusTrap.hook";
 import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent.hook";
@@ -20,12 +20,10 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  ref: ForwardedRef<OverlayContentsRef>;
 };
 
-export const Drawer = forwardRef<OverlayContentsRef, Props>(function Drawer(
-  { drawerContentsId, isOpen, onClose, children },
-  ref,
-): ReactElement {
+export const Drawer: FC<Props> = ({ drawerContentsId, isOpen, onClose, children, ref }) => {
   const drawerContentsRef = useRef<HTMLDivElement>(null);
   useImperativeHandle(ref, () => ({
     focusFirstElement: () => {
@@ -64,4 +62,4 @@ export const Drawer = forwardRef<OverlayContentsRef, Props>(function Drawer(
       </div>
     </>
   );
-});
+};
