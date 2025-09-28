@@ -1,9 +1,9 @@
-import type { MutableRefObject } from "react";
+import type { RefObject } from "react";
 import { useCallback } from "react";
 import { FOCUSABLE_ELEMENTS } from "@/utils/constants/accessibility/focusableElements";
 import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent.hook";
 
-export const useFocusTrap = (contentsRef: MutableRefObject<HTMLElement | null>, isOpen: boolean): void => {
+export const useFocusTrap = (contentsRef: RefObject<HTMLElement | null>, isOpen: boolean): void => {
   const handler = useCallback(
     (e: KeyboardEvent) => {
       if (!contentsRef.current || !isOpen) return;
