@@ -13,10 +13,11 @@ type Props = {
 };
 
 export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
-  const { trigger, isMutating } = usePostMessage(storeId);
-  const { mutate } = useFetchMessageDetail(storeId);
+  const { trigger: submitForm, isMutating: isFormMutating } = usePostMessage(storeId);
+  const { mutate: mutateMessageDetail } = useFetchMessageDetail(storeId);
   const { optimisticUpdate, rollbackData } = useOptimisticUpdateMessageDetail(storeId);
-  const { inputText, resetInputText, TextInput } = useMessageDetailTextInput({ disabled: isMutating });
+
+  const { inputText, resetInputText, TextInput } = useMessageDetailTextInput({ disabled: isFormMutating });
 
   const handleSubmit = async () => {
     if (!inputText) {
@@ -29,8 +30,8 @@ export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
     try {
       await optimisticUpdate({ inputText });
       onSubmit();
-      await trigger(formData);
-      await mutate();
+      await submitForm(formData);
+      await mutateMessageDetail();
       resetInputText();
     } catch (error) {
       if (error instanceof Error) {
@@ -39,7 +40,7 @@ export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
       }
     }
   };
-  const disabledSubmit = isMutating;
+  const disabledSubmit = isFormMutating || !inputText;
 
   return (
     <div className="flex w-full max-w-2xl items-end border bg-white shadow-md">
