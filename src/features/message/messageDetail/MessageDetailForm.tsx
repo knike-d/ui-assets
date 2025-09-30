@@ -1,6 +1,6 @@
 "use client";
-import { useState, type FC } from "react";
-import { MessageDetailFormInput } from "@/features/message/messageDetail/MessageDetailFormInput";
+import { type FC } from "react";
+import { useMessageDetailTextInput } from "@/features/message/messageDetail/useMessageDetailTextInput";
 import {
   useFetchMessageDetail,
   useOptimisticUpdateMessageDetail,
@@ -13,14 +13,10 @@ type Props = {
 };
 
 export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
-  const [inputText, setInputText] = useState("");
   const { trigger, isMutating } = usePostMessage(storeId);
   const { mutate } = useFetchMessageDetail(storeId);
   const { optimisticUpdate, rollbackData } = useOptimisticUpdateMessageDetail(storeId);
-
-  const handleChangeTextarea = (text: string): void => {
-    setInputText(text);
-  };
+  const { inputText, resetInputText, TextInput } = useMessageDetailTextInput({ disabled: isMutating });
 
   const handleSubmit = async () => {
     if (!inputText) {
@@ -35,7 +31,7 @@ export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
       onSubmit();
       await trigger(formData);
       await mutate();
-      setInputText("");
+      resetInputText();
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
@@ -47,7 +43,7 @@ export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
 
   return (
     <div className="flex w-full max-w-2xl items-end border bg-white shadow-md">
-      <MessageDetailFormInput disabled={isMutating} inputText={inputText} onChangeTextarea={handleChangeTextarea} />
+      {TextInput}
       <button
         className={`h-12 whitespace-nowrap rounded  p-3 text-white  ${disabledSubmit ? "bg-blue-500" : "bg-blue-700 hover:bg-blue-800"}`}
         data-testid="message-submit-button"

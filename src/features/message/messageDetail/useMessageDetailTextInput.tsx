@@ -1,18 +1,30 @@
-import type { ChangeEvent } from "react";
-import { type FC } from "react";
+"use client";
 
-type Props = {
-  inputText: string;
+import type { ChangeEvent, ReactElement } from "react";
+import { useState } from "react";
+
+type Params = {
   disabled: boolean;
-  onChangeTextarea: (text: string) => void;
 };
 
-export const MessageDetailFormInput: FC<Props> = ({ inputText, disabled, onChangeTextarea }) => {
-  const handleChangeTextarea = (event: ChangeEvent<HTMLTextAreaElement>): void => {
-    onChangeTextarea(event.target.value);
+type Result = {
+  inputText: string;
+  resetInputText: () => void;
+  TextInput: ReactElement;
+};
+
+export const useMessageDetailTextInput = ({ disabled }: Params): Result => {
+  const [inputText, setInputText] = useState("");
+
+  const resetInputText = (): void => {
+    setInputText("");
   };
 
-  return (
+  const handleChangeTextarea = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    setInputText(event.target.value);
+  };
+
+  const TextInput = (
     <div className="mx-1 flex w-full min-w-0">
       <div className="relative my-1 w-full overflow-auto text-sm">
         <div
@@ -29,4 +41,6 @@ export const MessageDetailFormInput: FC<Props> = ({ inputText, disabled, onChang
       </div>
     </div>
   );
+
+  return { inputText, resetInputText, TextInput };
 };
