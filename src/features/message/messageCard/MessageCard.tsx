@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const MessageDetailCard: FC<Props> = ({ fromStore, children }) => {
+export const MessageCard: FC<Props> = ({ fromStore, children }) => {
   return (
     <p
       className={`whitespace-pre-wrap break-words rounded-lg p-4 text-sm  ${fromStore ? "rounded-ss-none bg-gray-200 text-black" : "rounded-se-none bg-blue-600 text-white"}`}
