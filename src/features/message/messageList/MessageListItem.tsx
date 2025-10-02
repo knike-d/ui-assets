@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const MessageListCard: FC<Props> = ({ href, children }) => {
+export const MessageListItem: FC<Props> = ({ href, children }) => {
   return (
     <Link className="flex w-full items-center border-b p-8 hover:bg-slate-200" href={href}>
       <h3 className="text-lg">{children}</h3>
