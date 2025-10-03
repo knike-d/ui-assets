@@ -15,7 +15,7 @@ export const DetailDrawer: FC<Props> = ({ drawerId, isOpen, onClose, children })
     <div
       aria-hidden={!isOpen}
       aria-modal="true"
-      className={`z-overlay-content overflow-y-auto overscroll-y-contain bg-white transition-all duration-300 ${isOpen ? "w-200p" : "w-0"}`}
+      className={`z-overlay-content overflow-y-auto overscroll-y-contain bg-white transition-all duration-300 ${isOpen ? "w-200p" : "invisible w-0"}`}
       id={drawerId}
       role="dialog"
     >

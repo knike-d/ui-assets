@@ -1,7 +1,7 @@
 "use client";
 
 import type { FC } from "react";
-import { MessageListCard } from "@/features/message/messageList/MessageListCard";
+import { MessageListItem } from "@/features/message/messageList/MessageListItem";
 import { useFetchStoreList } from "@/features/store/useFetchStore";
 import { Spinner } from "@/utils/ui/loading/Spinner";
 
@@ -23,9 +23,9 @@ export const MessageList: FC = () => {
   return (
     <>
       {data.map(({ id, name }) => (
-        <MessageListCard key={id} href={id}>
+        <MessageListItem key={id} href={id}>
           {name}
-        </MessageListCard>
+        </MessageListItem>
       ))}
     </>
   );

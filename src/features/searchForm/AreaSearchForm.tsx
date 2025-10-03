@@ -13,14 +13,13 @@ type Props = {
 
 export const AreaSearchForm: FC<Props> = ({ locations }) => {
   const id = useId();
-  const modalId = `modal-${id}`;
 
   const { isOpen: isModalOpen, handleOverlayOpen, handleOverlayClose, overlayContentsRef } = useOverlayContent();
   const [selectedArea, setSelectedArea] = useState<SelectedArea>();
 
   return (
     <>
-      <SearchFormButton aria-controls={modalId} aria-expanded={!isModalOpen} onClick={handleOverlayOpen}>
+      <SearchFormButton aria-controls={id} aria-expanded={!isModalOpen} onClick={handleOverlayOpen}>
         <div className="flex">
           <span className="mr-1 w-20 whitespace-nowrap">エリア:</span>
           {selectedArea ? (
@@ -36,7 +35,7 @@ export const AreaSearchForm: FC<Props> = ({ locations }) => {
         ref={overlayContentsRef}
         isModalOpen={isModalOpen}
         locations={locations}
-        modalId={modalId}
+        modalId={id}
         selectedArea={selectedArea}
         onClose={handleOverlayClose}
         onSelect={setSelectedArea}

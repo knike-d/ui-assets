@@ -3,7 +3,7 @@
 import type { FC, ForwardedRef } from "react";
 import { useCallback, useImperativeHandle, useLayoutEffect, useRef } from "react";
 import type { MessageDetailRef } from "@/features/message/message.type";
-import { MessageDetailCardSwitcher } from "@/features/message/messageDetail/MessageDetailCardSwitcher";
+import { MessageCardSwitcher } from "@/features/message/messageCard/MessageCardSwitcher";
 import { MESSAGE_DETAIL_FETCH_LIMIT, useFetchMessageDetail } from "@/features/message/useFetchMessageDetail";
 import { useInViewTrigger } from "@/utils/hooks/interaction/useInViewTrigger";
 import { Spinner } from "@/utils/ui/loading/Spinner";
@@ -49,7 +49,7 @@ export const MessageDetail: FC<Props> = ({ storeId, ref }) => {
           className={`mb-2 first:mb-auto ${el.isOptimistic ? "opacity-60" : ""}`}
           data-testid={`${el.isOptimistic ? "optimistic-" : ""}message-card`}
         >
-          <MessageDetailCardSwitcher message={el} />
+          <MessageCardSwitcher message={el} />
         </li>
       ))}
       {!isValidating ? triggerElement : null}

@@ -8,7 +8,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const MessageDetailCardWithDate: FC<Props> = ({ createdAt, fromStore, children }) => {
+export const MessageCardWithDate: FC<Props> = ({ createdAt, fromStore, children }) => {
   return (
     <div className={`flex items-end ${fromStore ? "" : "flex-row-reverse"}`}>
       {children}
