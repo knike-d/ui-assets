@@ -38,8 +38,8 @@ export const BottomModal: FC<Props> = ({ modalId, isOpen, onClose, children, ref
       <FixedOverlay isOpen={isOpen} onClose={onClose} />
       <div
         ref={modalRef}
-        aria-hidden={!isOpen}
-        className={`fixed bottom-0 z-overlay-content flex h-5/6 w-full max-w-2xl flex-col overflow-y-auto overscroll-y-contain bg-white font-normal text-black transition-transform duration-300 ${isOpen ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-full opacity-0"}`}
+        className={`fixed bottom-0 z-overlay-content flex h-5/6 w-full max-w-2xl flex-col overflow-y-auto overscroll-y-contain bg-white font-normal text-black transition-transform duration-300 
+          ${isOpen ? "visible translate-y-0 opacity-100" : "invisible translate-y-full opacity-0"}`}
         id={modalId}
         role="dialog"
         aria-modal
@@ -47,7 +47,6 @@ export const BottomModal: FC<Props> = ({ modalId, isOpen, onClose, children, ref
         <button
           aria-label="モーダルを閉じる"
           className="ml-auto block h-12 flex-none px-4"
-          tabIndex={isOpen ? 0 : -1}
           type="button"
           onClick={onClose}
         >

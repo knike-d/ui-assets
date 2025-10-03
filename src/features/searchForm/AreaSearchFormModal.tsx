@@ -83,7 +83,7 @@ export const AreaSearchFormModal: FC<Props> = ({
                       key={pref.kana}
                       aria-controls={citiesDrawerId}
                       aria-label={isSelected ? "都道府県選択に戻る" : undefined}
-                      disabled={!isModalOpen || (selectedTempPref && !isSelected)}
+                      disabled={selectedTempPref && !isSelected}
                       isSelected={isSelected}
                       onClick={isDrawerOpen ? handlePrefSelectCancel : () => handlePrefSelect(pref)}
                     >
@@ -102,7 +102,6 @@ export const AreaSearchFormModal: FC<Props> = ({
               {cities.map((city) => (
                 <DetailDrawerListItemButton
                   key={city.id}
-                  disabled={!isModalOpen || !isDrawerOpen}
                   isSelected={city.id === tempSelectedArea.city?.id}
                   onClick={() => handleCitySelect(city)}
                 >
