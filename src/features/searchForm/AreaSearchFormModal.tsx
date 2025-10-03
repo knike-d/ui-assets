@@ -1,6 +1,6 @@
 "use client";
 import type { FC, ForwardedRef } from "react";
-import { useId, useState } from "react";
+import { Fragment, useId, useState } from "react";
 import type { AreaSelect } from "@/features/location/location.type";
 import type { SelectedArea } from "@/features/searchForm/searchForm.type";
 import { AbsoluteOverlay } from "@/utils/ui/overlay/AbsoluteOverlay";
@@ -31,10 +31,10 @@ export const AreaSearchFormModal: FC<Props> = ({
   ref,
 }) => {
   const id = useId();
-  const citiesDrawerId = `cities-drawer-${id}`;
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(!!selectedArea);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(!!selectedArea);
   const [tempSelectedArea, setTempSelectedArea] = useState<Partial<SelectedArea> | undefined>(selectedArea);
+  const selectedTempPref = tempSelectedArea?.prefecture;
 
   const handleAreaSelectCancel = (): void => {
     // モーダルUIを変更前の状態にリセット
@@ -43,28 +43,21 @@ export const AreaSearchFormModal: FC<Props> = ({
     onClose();
   };
 
-  const handlePrefSelect = (prefecture: AreaSelect.Prefecture): void => {
-    setIsDrawerOpen(true);
+  const handlePrefSelect = (prefecture: AreaSelect.Prefecture | undefined) => (): void => {
+    setIsDrawerOpen(!!prefecture);
     setTempSelectedArea({ prefecture });
   };
 
-  const handlePrefSelectCancel = (): void => {
-    setIsDrawerOpen(false);
-    setTempSelectedArea(undefined);
-  };
-
-  const handleCitySelect = (city: City): void => {
-    if (!tempSelectedArea?.prefecture) {
-      handlePrefSelectCancel();
+  const handleCitySelect = (city: City) => (): void => {
+    if (!selectedTempPref) {
+      setIsDrawerOpen(false);
       alert("都道府県が選択されていません");
       return;
     }
     setTempSelectedArea((prev) => ({ ...prev, city }));
-    onSelect({ prefecture: tempSelectedArea.prefecture, city });
+    onSelect({ prefecture: selectedTempPref, city });
     onClose();
   };
-
-  const selectedTempPref = !!tempSelectedArea?.prefecture;
 
   return (
     <BottomModal ref={ref} isOpen={isModalOpen} modalId={modalId} onClose={handleAreaSelectCancel}>
@@ -72,43 +65,40 @@ export const AreaSearchFormModal: FC<Props> = ({
       <div className="relative flex size-full overflow-y-auto p-4">
         <div className={`w-full ${selectedTempPref ? "overflow-hidden" : "overflow-y-auto overscroll-y-contain"}`}>
           <div className="relative">
-            <AbsoluteOverlay isOpen={isDrawerOpen} onClose={handlePrefSelectCancel} />
-            {locations?.map((el) => (
-              <div key={el.id} className="w-full">
+            <AbsoluteOverlay isOpen={isDrawerOpen} onClose={handlePrefSelect(undefined)} />
+            {locations.map((el) => (
+              <Fragment key={el.id}>
                 <p className="sticky top-0 z-10 w-full bg-gray-300 px-2 font-bold">{el.region}</p>
-                {el.prefectures.map((pref) => {
-                  const isSelected = pref.id === tempSelectedArea?.prefecture?.id;
-                  return (
-                    <DetailDrawerOpenButton
-                      key={pref.kana}
-                      aria-controls={citiesDrawerId}
-                      aria-label={isSelected ? "都道府県選択に戻る" : undefined}
-                      disabled={selectedTempPref && !isSelected}
-                      isSelected={isSelected}
-                      onClick={isDrawerOpen ? handlePrefSelectCancel : () => handlePrefSelect(pref)}
-                    >
-                      <span className="truncate">{pref.name}</span>
-                    </DetailDrawerOpenButton>
-                  );
-                })}
-              </div>
+                {el.prefectures.map((pref) => (
+                  <DetailDrawerOpenButton
+                    key={pref.id}
+                    aria-controls={id}
+                    aria-label={pref.id === selectedTempPref?.id ? "都道府県選択に戻る" : undefined}
+                    disabled={selectedTempPref && pref.id !== selectedTempPref.id}
+                    isSelected={pref.id === selectedTempPref?.id}
+                    onClick={handlePrefSelect(isDrawerOpen ? undefined : pref)}
+                  >
+                    <span className="truncate">{pref.name}</span>
+                  </DetailDrawerOpenButton>
+                ))}
+              </Fragment>
             ))}
           </div>
         </div>
-        <DetailDrawer drawerId={citiesDrawerId} isOpen={isDrawerOpen} onClose={handlePrefSelectCancel}>
+        <DetailDrawer drawerId={id} isOpen={isDrawerOpen} onClose={handlePrefSelect(undefined)}>
           {tempSelectedArea?.prefecture?.groupedCities.map(({ columnName, cities }) => (
-            <div key={columnName} className="w-full">
+            <Fragment key={columnName}>
               <p className="sticky top-0 z-10 w-full bg-gray-300 px-2 font-bold">{columnName}</p>
               {cities.map((city) => (
                 <DetailDrawerListItemButton
                   key={city.id}
                   isSelected={city.id === tempSelectedArea.city?.id}
-                  onClick={() => handleCitySelect(city)}
+                  onClick={handleCitySelect(city)}
                 >
                   <span className="truncate">{city.name}</span>
                 </DetailDrawerListItemButton>
               ))}
-            </div>
+            </Fragment>
           ))}
         </DetailDrawer>
       </div>
