@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useFocusHolder } from "@/utils/hooks/accessibility/useFocusHolder";
 import { useToggleBodyFixed } from "@/utils/hooks/uiControl/useToggleBodyFixed";
 
@@ -16,15 +16,18 @@ export const useOverlayContent = () => {
   const handleOverlayOpen = useCallback(() => {
     storeFocusedElement();
     setIsOpen(true);
-    if (overlayRef.current) {
-      overlayRef.current.focusFirstElement();
-    }
   }, [storeFocusedElement]);
 
   const handleOverlayClose = useCallback(() => {
     setIsOpen(false);
     restoreFocusedElement();
   }, [restoreFocusedElement]);
+
+  useEffect(() => {
+    if (isOpen) {
+      overlayRef.current?.focusFirstElement();
+    }
+  }, [isOpen]);
 
   return { isOpen, overlayRef, handleOverlayOpen, handleOverlayClose };
 };
