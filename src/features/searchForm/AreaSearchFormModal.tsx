@@ -4,11 +4,11 @@ import { Fragment, useId, useState } from "react";
 import type { AreaSelect } from "@/features/location/location.type";
 import type { SelectedArea } from "@/features/searchForm/searchForm.type";
 import { AbsoluteOverlay } from "@/utils/ui/overlay/AbsoluteOverlay";
-import { DetailDrawer } from "@/utils/ui/overlay/DetailDrawer/DetailDrawer";
-import { DetailDrawerListItemButton } from "@/utils/ui/overlay/DetailDrawer/DetailDrawerListItemButton";
-import { DetailDrawerOpenButton } from "@/utils/ui/overlay/DetailDrawer/DetailDrawerOpenButton";
-import { BottomModal } from "@/utils/ui/overlay/Modal/BottomModal";
-import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlayContent.hook";
+import { DetailDrawer } from "@/utils/ui/overlay/detailDrawer/DetailDrawer";
+import { DetailDrawerListItemButton } from "@/utils/ui/overlay/detailDrawer/DetailDrawerListItemButton";
+import { DetailDrawerOpenButton } from "@/utils/ui/overlay/detailDrawer/DetailDrawerOpenButton";
+import { BottomModal } from "@/utils/ui/overlay/modal/BottomModal";
+import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlay";
 import type { City } from "@prisma/client";
 
 type Props = {

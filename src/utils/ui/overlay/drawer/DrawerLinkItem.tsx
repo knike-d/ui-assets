@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { use, type ComponentProps, type ReactNode } from "react";
 import Link from "next/link";
-import { DrawerContext } from "@/utils/ui/overlay/Drawer/Drawer";
+import { DrawerContext } from "@/utils/ui/overlay/drawer/Drawer";
 
 type Props = {
   href: NonNullable<ComponentProps<"a">["href"]>;

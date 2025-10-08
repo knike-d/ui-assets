@@ -5,7 +5,7 @@ import type { AreaSelect } from "@/features/location/location.type";
 import { AreaSearchFormModal } from "@/features/searchForm/AreaSearchFormModal";
 import { SearchFormButton } from "@/features/searchForm/SearchFormButton";
 import type { SelectedArea } from "@/features/searchForm/searchForm.type";
-import { useOverlayContent } from "@/utils/ui/overlay/useOverlayContent.hook";
+import { useOverlayContent } from "@/utils/ui/overlay/useOverlay";
 
 type Props = {
   locations: AreaSelect.Region[];
@@ -14,7 +14,7 @@ type Props = {
 export const AreaSearchForm: FC<Props> = ({ locations }) => {
   const id = useId();
 
-  const { isOpen: isModalOpen, handleOverlayOpen, handleOverlayClose, overlayContentsRef } = useOverlayContent();
+  const { isOpen: isModalOpen, handleOverlayOpen, handleOverlayClose, overlayRef } = useOverlayContent();
   const [selectedArea, setSelectedArea] = useState<SelectedArea>();
 
   return (
@@ -32,7 +32,7 @@ export const AreaSearchForm: FC<Props> = ({ locations }) => {
         </div>
       </SearchFormButton>
       <AreaSearchFormModal
-        ref={overlayContentsRef}
+        ref={overlayRef}
         isModalOpen={isModalOpen}
         locations={locations}
         modalId={id}
