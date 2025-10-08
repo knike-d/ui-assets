@@ -5,7 +5,6 @@ import { useImperativeHandle, useRef } from "react";
 import { FOCUSABLE_ELEMENTS } from "@/utils/constants/accessibility/focusableElements";
 import { useFocusTrap } from "@/utils/hooks/accessibility/useFocusTrap.hook";
 import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent.hook";
-import { useToggleBodyFixed } from "@/utils/hooks/uiControl/useToggleBodyFixed";
 import { CloseIcon } from "@/utils/ui/Icon/CloseIcon";
 import { FixedOverlay } from "@/utils/ui/overlay/FixedOverlay";
 import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlayContent.hook";
@@ -29,7 +28,6 @@ export const BottomModal: FC<Props> = ({ modalId, isOpen, onClose, children, ref
     },
   }));
 
-  useToggleBodyFixed(isOpen);
   useKeyEvent("keydown", "Escape", onClose);
   useFocusTrap(modalRef, isOpen);
 
