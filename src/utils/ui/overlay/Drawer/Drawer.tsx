@@ -7,7 +7,7 @@ import { useFocusTrap } from "@/utils/hooks/accessibility/useFocusTrap.hook";
 import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent.hook";
 import { CloseIcon } from "@/utils/ui/Icon/CloseIcon";
 import { FixedOverlay } from "@/utils/ui/overlay/FixedOverlay";
-import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlayContent.hook";
+import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlay.hook";
 
 export const DrawerContext = createContext({
   isOpen: false,

@@ -5,10 +5,10 @@ import { useId } from "react";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@/utils/ui/Icon/HamburgerMenuIcon";
 import { CommonDrawer } from "@/utils/ui/overlay/Drawer/CommonDrawer";
-import { useOverlayContent } from "@/utils/ui/overlay/useOverlayContent.hook";
+import { useOverlayContent } from "@/utils/ui/overlay/useOverlay.hook";
 
 export const Header: FC = () => {
-  const { isOpen, overlayContentsRef, handleOverlayOpen, handleOverlayClose } = useOverlayContent();
+  const { isOpen, overlayRef, handleOverlayOpen, handleOverlayClose } = useOverlayContent();
   const id = useId();
   return (
     <header className="bg-emerald-500">
@@ -26,7 +26,7 @@ export const Header: FC = () => {
         >
           <HamburgerMenuIcon />
         </button>
-        <CommonDrawer ref={overlayContentsRef} drawerContentsId={id} isOpen={isOpen} onClose={handleOverlayClose} />
+        <CommonDrawer ref={overlayRef} drawerContentsId={id} isOpen={isOpen} onClose={handleOverlayClose} />
       </nav>
     </header>
   );

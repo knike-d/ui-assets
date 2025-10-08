@@ -5,7 +5,7 @@ import { useFetchStore } from "@/features/store/useFetchStore";
 import { HamburgerMenuIcon } from "@/utils/ui/Icon/HamburgerMenuIcon";
 import { LeftArrowIcon } from "@/utils/ui/Icon/LeftArrowIcon";
 import { CommonDrawer } from "@/utils/ui/overlay/Drawer/CommonDrawer";
-import { useOverlayContent } from "@/utils/ui/overlay/useOverlayContent.hook";
+import { useOverlayContent } from "@/utils/ui/overlay/useOverlay.hook";
 
 type Props = {
   storeId: string;
@@ -13,7 +13,7 @@ type Props = {
 
 export const MessageDetailPageHeader: FC<Props> = ({ storeId }) => {
   const { data } = useFetchStore(storeId);
-  const { isOpen, overlayContentsRef, handleOverlayOpen, handleOverlayClose } = useOverlayContent();
+  const { isOpen, overlayRef, handleOverlayOpen, handleOverlayClose } = useOverlayContent();
   const id = useId();
 
   const handleBackButton = () => {
@@ -37,7 +37,7 @@ export const MessageDetailPageHeader: FC<Props> = ({ storeId }) => {
         >
           <HamburgerMenuIcon className="fill-black" />
         </button>
-        <CommonDrawer ref={overlayContentsRef} drawerContentsId={id} isOpen={isOpen} onClose={handleOverlayClose} />
+        <CommonDrawer ref={overlayRef} drawerContentsId={id} isOpen={isOpen} onClose={handleOverlayClose} />
       </nav>
     </header>
   );
