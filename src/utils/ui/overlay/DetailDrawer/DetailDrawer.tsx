@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from "react";
-import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent.hook";
+import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent";
 
 type Props = {
   drawerId: string;

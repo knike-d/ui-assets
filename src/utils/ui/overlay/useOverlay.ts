@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { useFocusHolder } from "@/utils/hooks/accessibility/useFocusHolder.hook";
+import { useFocusHolder } from "@/utils/hooks/accessibility/useFocusHolder";
 import { useToggleBodyFixed } from "@/utils/hooks/uiControl/useToggleBodyFixed";
 
 export type OverlayContentsRef = {

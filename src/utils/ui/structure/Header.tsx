@@ -5,7 +5,7 @@ import { useId } from "react";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@/utils/ui/Icon/HamburgerMenuIcon";
 import { CommonDrawer } from "@/utils/ui/overlay/Drawer/CommonDrawer";
-import { useOverlayContent } from "@/utils/ui/overlay/useOverlay.hook";
+import { useOverlayContent } from "@/utils/ui/overlay/useOverlay";
 
 export const Header: FC = () => {
   const { isOpen, overlayRef, handleOverlayOpen, handleOverlayClose } = useOverlayContent();

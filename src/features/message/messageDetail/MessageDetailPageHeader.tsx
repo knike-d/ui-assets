@@ -5,7 +5,7 @@ import { useFetchStore } from "@/features/store/useFetchStore";
 import { HamburgerMenuIcon } from "@/utils/ui/Icon/HamburgerMenuIcon";
 import { LeftArrowIcon } from "@/utils/ui/Icon/LeftArrowIcon";
 import { CommonDrawer } from "@/utils/ui/overlay/Drawer/CommonDrawer";
-import { useOverlayContent } from "@/utils/ui/overlay/useOverlay.hook";
+import { useOverlayContent } from "@/utils/ui/overlay/useOverlay";
 
 type Props = {
   storeId: string;

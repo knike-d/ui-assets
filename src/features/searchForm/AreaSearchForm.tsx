@@ -5,7 +5,7 @@ import type { AreaSelect } from "@/features/location/location.type";
 import { AreaSearchFormModal } from "@/features/searchForm/AreaSearchFormModal";
 import { SearchFormButton } from "@/features/searchForm/SearchFormButton";
 import type { SelectedArea } from "@/features/searchForm/searchForm.type";
-import { useOverlayContent } from "@/utils/ui/overlay/useOverlay.hook";
+import { useOverlayContent } from "@/utils/ui/overlay/useOverlay";
 
 type Props = {
   locations: AreaSelect.Region[];

@@ -3,11 +3,11 @@
 import type { FC, ForwardedRef, ReactNode } from "react";
 import { useImperativeHandle, useRef } from "react";
 import { FOCUSABLE_ELEMENTS } from "@/utils/constants/accessibility/focusableElements";
-import { useFocusTrap } from "@/utils/hooks/accessibility/useFocusTrap.hook";
-import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent.hook";
+import { useFocusTrap } from "@/utils/hooks/accessibility/useFocusTrap";
+import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent";
 import { CloseIcon } from "@/utils/ui/Icon/CloseIcon";
 import { FixedOverlay } from "@/utils/ui/overlay/FixedOverlay";
-import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlay.hook";
+import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlay";
 
 type Props = {
   modalId: string;

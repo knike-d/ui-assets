@@ -8,7 +8,7 @@ import { DetailDrawer } from "@/utils/ui/overlay/DetailDrawer/DetailDrawer";
 import { DetailDrawerListItemButton } from "@/utils/ui/overlay/DetailDrawer/DetailDrawerListItemButton";
 import { DetailDrawerOpenButton } from "@/utils/ui/overlay/DetailDrawer/DetailDrawerOpenButton";
 import { BottomModal } from "@/utils/ui/overlay/Modal/BottomModal";
-import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlay.hook";
+import type { OverlayContentsRef } from "@/utils/ui/overlay/useOverlay";
 import type { City } from "@prisma/client";
 
 type Props = {

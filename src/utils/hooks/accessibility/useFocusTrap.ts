@@ -1,7 +1,7 @@
 import type { RefObject } from "react";
 import { useCallback } from "react";
 import { FOCUSABLE_ELEMENTS } from "@/utils/constants/accessibility/focusableElements";
-import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent.hook";
+import { useKeyEvent } from "@/utils/hooks/accessibility/useKeyEvent";
 
 export const useFocusTrap = (contentsRef: RefObject<HTMLElement | null>, isOpen: boolean): void => {
   const handler = useCallback(
