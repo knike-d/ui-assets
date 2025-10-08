@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { useId } from "react";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@/utils/ui/Icon/HamburgerMenuIcon";
-import { CommonDrawer } from "@/utils/ui/overlay/Drawer/CommonDrawer";
+import { CommonDrawer } from "@/utils/ui/overlay/drawer/CommonDrawer";
 import { useOverlayContent } from "@/utils/ui/overlay/useOverlay";
 
 export const Header: FC = () => {
