@@ -16,7 +16,7 @@ export const MessageDetailPageHeader: FC<Props> = ({ storeId }) => {
   const { isOpen, overlayRef, handleOverlayOpen, handleOverlayClose } = useOverlayContent();
   const id = useId();
 
-  const handleBackButton = () => {
+  const handleBackButton = (): void => {
     history.back();
   };
 

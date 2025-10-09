@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import type { Store } from "@prisma/client";
+import type { SWRResponse } from "swr";
 
 const rootUrl = "/api/store";
 const url = {
@@ -7,11 +8,11 @@ const url = {
   storeList: `${rootUrl}/list`,
 };
 
-export const useFetchStore = (storeId: string) => {
+export const useFetchStore = (storeId: string): SWRResponse<Store> => {
   return useSWR<Store>(`${url.store}/${storeId}`);
 };
 
-export const useFetchStoreList = () => {
+export const useFetchStoreList = (): SWRResponse<Store[]> => {
   // TODO: useSWRInfiniteを使う
-  return useSWR<Store[]>(url.storeList);
+  return useSWR(url.storeList);
 };

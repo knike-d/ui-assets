@@ -1,7 +1,7 @@
 import type { UIAssetCardModel } from "@/features/uiAsset/uiAsset.type";
 
-const createPageLink = (path: string) => `/pages/${path}`;
-const createPartsLink = (path: string) => `/parts/${path}`;
+const createPageLink = (path: string): string => `/pages/${path}`;
+const createPartsLink = (path: string): string => `/parts/${path}`;
 
 type PageName = "message-list";
 export const AssetPages: Record<PageName, UIAssetCardModel> = {

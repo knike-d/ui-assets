@@ -5,6 +5,6 @@ export const DateFormat = {
   HourMinute: "HH:mm",
 } as const;
 
-export const formatDate = (type: ValueOf<typeof DateFormat>, date: string) => {
+export const formatDate = (type: ValueOf<typeof DateFormat>, date: string): string => {
   return dayjs(date).tz().format(type);
 };

@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type { Metadata } from "next";
 import { AssetParts } from "@/features/uiAsset/uiAsset.const";
 import { AccordionPage } from "@/page/accordion/AccordionPage";
@@ -7,6 +8,6 @@ export const metadata: Metadata = {
   description: AssetParts.accordion.name,
 };
 
-export default function Accordion() {
+export default function Accordion(): ReactElement {
   return <AccordionPage />;
 }

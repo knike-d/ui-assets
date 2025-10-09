@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type { Metadata } from "next";
 import { TopPage } from "@/page/top/TopPage";
 import { Footer } from "@/utils/ui/structure/Footer";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description: "TOPページ",
 };
 
-export default function Home() {
+export default function Home(): ReactElement {
   return (
     <>
       <Header />

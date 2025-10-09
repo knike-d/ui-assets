@@ -3,6 +3,8 @@ import useSWRInfinite from "swr/infinite";
 import useSWRMutation from "swr/mutation";
 import type { StoreUserMessage } from "@/features/message/message.type";
 import { customFetch } from "@/utils/functions/fetchManager";
+import type { SWRInfiniteResponse } from "swr/infinite";
+import type { SWRMutationResponse } from "swr/mutation";
 
 export const MESSAGE_DETAIL_FETCH_LIMIT = 20;
 
@@ -23,12 +25,12 @@ const getKey =
     return `${url.messages}/${storeId}?${searchParams.toString()}`;
   };
 
-export const useFetchMessageDetail = (storeId: string) => {
-  return useSWRInfinite<StoreUserMessage[]>(getKey(storeId), { revalidateFirstPage: false });
+export const useFetchMessageDetail = (storeId: string): SWRInfiniteResponse<StoreUserMessage[]> => {
+  return useSWRInfinite(getKey(storeId), { revalidateFirstPage: false });
 };
 
-export const usePostMessage = (storeId: string) => {
-  return useSWRMutation(`${url.messages}/${storeId}`, async (url, { arg }: Record<"arg", FormData>) => {
+export const usePostMessage = (storeId: string): SWRMutationResponse<unknown, unknown, string, FormData> => {
+  return useSWRMutation(`${url.messages}/${storeId}`, async (url, { arg }) => {
     return customFetch(url, {
       method: "POST",
       body: arg,
@@ -50,7 +52,12 @@ const createDummyMessage = (inputText: string): StoreUserMessage => {
   };
 };
 
-export const useOptimisticUpdateMessageDetail = (storeId: string) => {
+type OptimisticUpdateMessageDetailResult = {
+  optimisticUpdate: ({ inputText }: Record<"inputText", string>) => Promise<void>;
+  rollbackData: () => Promise<void>;
+};
+
+export const useOptimisticUpdateMessageDetail = (storeId: string): OptimisticUpdateMessageDetailResult => {
   const { mutate } = useFetchMessageDetail(storeId);
 
   const optimisticUpdate = useCallback(

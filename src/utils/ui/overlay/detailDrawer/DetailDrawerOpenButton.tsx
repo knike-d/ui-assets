@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, FC, ReactNode } from "react";
 import { RightArrowIcon } from "@/utils/ui/Icon/RightArrowIcon";
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode;
 } & Omit<ComponentProps<"button">, "className">;
 
-export const DetailDrawerOpenButton = ({ isSelected, children, ...buttonProps }: Props) => {
+export const DetailDrawerOpenButton: FC<Props> = ({ isSelected, children, ...buttonProps }) => {
   return (
     <button
       {...buttonProps}

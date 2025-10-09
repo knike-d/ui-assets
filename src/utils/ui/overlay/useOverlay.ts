@@ -1,3 +1,4 @@
+import type { RefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useFocusHolder } from "@/utils/hooks/accessibility/useFocusHolder";
 import { useToggleBodyFixed } from "@/utils/hooks/uiControl/useToggleBodyFixed";
@@ -6,7 +7,14 @@ export type OverlayContentsRef = {
   focusFirstElement: () => void;
 };
 
-export const useOverlayContent = () => {
+type Result = {
+  isOpen: boolean;
+  overlayRef: RefObject<OverlayContentsRef | null>;
+  handleOverlayOpen: () => void;
+  handleOverlayClose: () => void;
+};
+
+export const useOverlayContent = (): Result => {
   const { storeFocusedElement, restoreFocusedElement } = useFocusHolder();
   const [isOpen, setIsOpen] = useState(false);
   const overlayRef = useRef<OverlayContentsRef>(null);

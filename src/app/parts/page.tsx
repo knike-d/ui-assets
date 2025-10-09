@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type { Metadata } from "next";
 import { PartsListPage } from "@/page/partsList/PartsListPage";
 
@@ -6,6 +7,6 @@ export const metadata: Metadata = {
   description: "パーツ一覧",
 };
 
-export default function PartsList() {
+export default function PartsList(): ReactElement {
   return <PartsListPage />;
 }

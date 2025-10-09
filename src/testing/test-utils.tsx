@@ -6,32 +6,34 @@ import { TestSWRProvider } from "@/testing/TestSWRProvider";
 import { generateMessage, generateStore, generateUser } from "@/testing/data-generators";
 import { db } from "@/testing/mocks/db";
 import type { Store, User } from "@prisma/client";
-import type { RenderOptions } from "@testing-library/react";
+import type { RenderOptions, RenderResult } from "@testing-library/react";
 
-export const waitForLoadingToFinish = () =>
+export const waitForLoadingToFinish = (): Promise<void> =>
   waitForElementToBeRemoved(() => [...screen.queryAllByTestId(/loading/i)], {
     timeout: 5000,
   });
 
-export const createStore = async (userProperties?: Partial<Store>) => {
+export const createStore = async (userProperties?: Partial<Store>): Promise<Store> => {
   const store = generateStore(userProperties);
   await db.store.create(store);
   return store;
 };
 
-export const createUser = async (userProperties?: Partial<User>) => {
+export const createUser = async (userProperties?: Partial<User>): Promise<User> => {
   const user = generateUser(userProperties);
   await db.user.create(user);
   return user;
 };
 
-export const createMessage = async (messageProperties?: Partial<StoreUserMessageForClient>) => {
+export const createMessage = async (
+  messageProperties?: Partial<StoreUserMessageForClient>,
+): Promise<StoreUserMessageForClient> => {
   const message = generateMessage(messageProperties);
-  const res = await db.message.create(message);
-  return res;
+  await db.message.create(message);
+  return message;
 };
 
-export const renderApp = async (ui: ReactNode, renderOptions: RenderOptions = {}) => {
+export const renderApp = async (ui: ReactNode, renderOptions: RenderOptions = {}): Promise<RenderResult> => {
   const returnValue = {
     ...rtlRender(ui, {
       wrapper: TestSWRProvider,
@@ -41,7 +43,6 @@ export const renderApp = async (ui: ReactNode, renderOptions: RenderOptions = {}
 
   return returnValue;
 };
-
 const userEvent = _userEvent.setup();
 export * from "@testing-library/react";
 export { rtlRender, userEvent };
