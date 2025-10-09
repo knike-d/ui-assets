@@ -50,7 +50,7 @@ export const useToggleBodyFixed = (isFixed: boolean): void => {
       toggleBodyFixed(true);
     }
 
-    return () => {
+    return (): void => {
       if (isFixed) {
         toggleBodyFixed(false);
       }

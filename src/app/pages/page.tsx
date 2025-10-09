@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type { Metadata } from "next";
 import { PageListPage } from "@/page/pageList/PageListPage";
 import { Footer } from "@/utils/ui/structure/Footer";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description: "ページ一覧",
 };
 
-export default function PageList() {
+export default function PageList(): ReactElement {
   return (
     <>
       <Header />

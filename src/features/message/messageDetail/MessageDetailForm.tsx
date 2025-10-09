@@ -19,7 +19,7 @@ export const MessageDetailForm: FC<Props> = ({ storeId, onSubmit }) => {
 
   const { inputText, resetInputText, TextInput } = useMessageDetailTextInput({ disabled: isFormMutating });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     if (!inputText) {
       return;
     }

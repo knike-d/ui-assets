@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type { Metadata } from "next";
 import { AssetPages } from "@/features/uiAsset/uiAsset.const";
 import { MessageListPage } from "@/page/message/MessageListPage";
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   description: AssetPages["message-list"].name,
 };
 
-export default function MessageList() {
+export default function MessageList(): ReactElement {
   return (
     <>
       <Header />

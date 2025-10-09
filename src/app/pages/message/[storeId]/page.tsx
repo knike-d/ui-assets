@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type { Metadata } from "next";
 import { MessageDetailPage } from "@/page/message/MessageDetailPage";
 
@@ -12,7 +13,7 @@ type Props = {
   }>;
 };
 
-export default async function Message({ params }: Props) {
+export default async function Message({ params }: Props): Promise<ReactElement> {
   const { storeId } = await params;
   return <MessageDetailPage storeId={storeId} />;
 }

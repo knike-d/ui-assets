@@ -10,7 +10,7 @@ type KeyEventFunc = (
 
 export const useKeyEvent: KeyEventFunc = (keyEventType, key, onKeyMatch, onKeyMismatch) => {
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
+    const handler = (e: KeyboardEvent): void => {
       if (e.key === key) {
         onKeyMatch?.(e);
       } else {
@@ -19,7 +19,7 @@ export const useKeyEvent: KeyEventFunc = (keyEventType, key, onKeyMatch, onKeyMi
     };
 
     document.addEventListener(keyEventType, handler);
-    return () => {
+    return (): void => {
       document.removeEventListener(keyEventType, handler);
     };
   }, [keyEventType, key, onKeyMatch, onKeyMismatch]);

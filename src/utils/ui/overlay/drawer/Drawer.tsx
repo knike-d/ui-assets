@@ -25,7 +25,7 @@ type Props = {
 export const Drawer: FC<Props> = ({ drawerContentsId, isOpen, onClose, children, ref }) => {
   const drawerContentsRef = useRef<HTMLDivElement>(null);
   useImperativeHandle(ref, () => ({
-    focusFirstElement: () => {
+    focusFirstElement: (): void => {
       if (drawerContentsRef.current) {
         const firstItem = drawerContentsRef.current.querySelector<HTMLDivElement>(FOCUSABLE_ELEMENTS.join());
         firstItem?.focus();

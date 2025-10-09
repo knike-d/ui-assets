@@ -1,6 +1,11 @@
 import { useCallback, useState } from "react";
 
-export const useFocusHolder = () => {
+type Result = {
+  storeFocusedElement: () => void;
+  restoreFocusedElement: () => void;
+};
+
+export const useFocusHolder = (): Result => {
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null);
 
   const storeFocusedElement = useCallback(() => {

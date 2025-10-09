@@ -18,7 +18,7 @@ const OPTIMISTIC_MESSAGE_ID = "optimistic-message-card";
 const MESSAGE_ID = "message-card";
 const TEST_MESSAGE = "test-message-text";
 
-const testSubmit = async () => {
+const testSubmit = async (): Promise<void> => {
   const store = await createStore();
   const user = await createUser();
   await createMessage({ userId: user.id, storeId: store.id });
@@ -53,7 +53,7 @@ describe("メッセージ詳細ページ", () => {
       });
     });
     describe("送信に失敗したとき", () => {
-      const testFailedSubmit = async () => {
+      const testFailedSubmit = async (): Promise<void> => {
         const alertFunc = vi.fn();
         window.alert = alertFunc;
         server.use(messageErrorHandler.messageSubmit);

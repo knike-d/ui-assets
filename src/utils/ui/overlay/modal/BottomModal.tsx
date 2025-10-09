@@ -20,7 +20,7 @@ type Props = {
 export const BottomModal: FC<Props> = ({ modalId, isOpen, onClose, children, ref }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   useImperativeHandle(ref, () => ({
-    focusFirstElement: () => {
+    focusFirstElement: (): void => {
       if (modalRef.current) {
         const firstItem = modalRef.current.querySelector<HTMLDivElement>(FOCUSABLE_ELEMENTS.join());
         firstItem?.focus();

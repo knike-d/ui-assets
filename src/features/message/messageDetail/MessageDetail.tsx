@@ -27,7 +27,7 @@ export const MessageDetail: FC<Props> = ({ storeId, ref }) => {
 
   const messageDetailRef = useRef<HTMLUListElement>(null);
   useImperativeHandle(ref, () => ({
-    scrollToBottom: () => {
+    scrollToBottom: (): void => {
       messageDetailRef.current?.scrollBy(0, messageDetailRef.current.scrollHeight);
     },
   }));

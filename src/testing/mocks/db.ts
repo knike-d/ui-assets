@@ -34,7 +34,7 @@ export type Model = keyof typeof models;
 
 const dbFilePath = "mocked-db.json";
 
-export const loadDb = async () => {
+export const loadDb = async (): Promise<any> => {
   if (typeof window === "undefined") {
     const { readFile, writeFile } = await import("fs/promises");
     try {
@@ -54,7 +54,7 @@ export const loadDb = async () => {
   return Object.assign(JSON.parse(window.localStorage.getItem("msw-db") || "{}"));
 };
 
-export const storeDb = async (data: string) => {
+export const storeDb = async (data: string): Promise<void> => {
   if (typeof window === "undefined") {
     const { writeFile } = await import("fs/promises");
     await writeFile(dbFilePath, data);
@@ -63,14 +63,14 @@ export const storeDb = async (data: string) => {
   }
 };
 
-export const persistDb = async (model: Model) => {
+export const persistDb = async (model: Model): Promise<void> => {
   if (process.env.NODE_ENV === "test") return;
   const data = await loadDb();
   data[model] = db[model].getAll();
   await storeDb(JSON.stringify(data));
 };
 
-export const initializeDb = async () => {
+export const initializeDb = async (): Promise<void> => {
   const database = await loadDb();
   Object.entries(db).forEach(([key, model]) => {
     const dataEntries = database[key];
@@ -82,6 +82,6 @@ export const initializeDb = async () => {
   });
 };
 
-export const resetDb = () => {
+export const resetDb = (): void => {
   window.localStorage.clear();
 };

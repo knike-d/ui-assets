@@ -8,10 +8,10 @@ beforeAll(() => {
   server.listen({ onUnhandledRequest: "error" });
   HTMLElement.prototype.scrollIntoView = vi.fn();
   HTMLElement.prototype.scrollBy = vi.fn();
-  const intersectionObserverMock = () => ({
-    observe: () => null,
-    unobserve: () => null,
-    disconnect: () => null,
+  const intersectionObserverMock = (): Partial<IntersectionObserver> => ({
+    observe: (): null => null,
+    unobserve: (): null => null,
+    disconnect: (): null => null,
   });
   window.IntersectionObserver = vi.fn().mockImplementation(intersectionObserverMock);
 });

@@ -1,12 +1,16 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import prisma from "@/utils/libs/prisma/prisma";
+import type { StoreUserMessage } from "@prisma/client";
 
 type Params = {
   params: Promise<{ storeId: string }>;
 };
 
-export const GET = async (req: NextRequest, { params }: Params) => {
+export const GET = async (
+  req: NextRequest,
+  { params }: Params,
+): Promise<NextResponse<Omit<StoreUserMessage, "userId" | "storeId">[]>> => {
   const { storeId } = await params;
   const searchParams = req.nextUrl.searchParams;
   const cursor = searchParams.get("cursor");
@@ -37,7 +41,7 @@ export const GET = async (req: NextRequest, { params }: Params) => {
   return NextResponse.json(data, { status: 200 });
 };
 
-export const POST = async (req: NextRequest, { params }: Params) => {
+export const POST = async (req: NextRequest, { params }: Params): Promise<NextResponse> => {
   const { storeId } = await params;
 
   const store = await prisma.store.findFirst({ where: { id: storeId } });
