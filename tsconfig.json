@@ -1,28 +1,32 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "noUncheckedIndexedAccess": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "target": "es5", // 出力するJavaScriptのターゲットバージョン
+    "lib": ["dom", "dom.iterable", "esnext"], // コンパイル時に含める型定義ライブラリ
+    "baseUrl": ".", // 相対パス解決の基準ディレクトリ
+    "paths": { "@/*": ["./src/*"] }, // パスエイリアスの定義
+    "jsx": "preserve", // JSX構文の扱い方 ("preserve"はJSXをそのまま出力)
+
+    "module": "esnext", // 出力するモジュールシステムの形式
+    "moduleResolution": "bundler", // モジュール解決の戦略（Next.jsやViteでは"bundler"が推奨）
+    "resolveJsonModule": true, // JSONファイルのimportを許可
+    "esModuleInterop": true, // CommonJSモジュールのinteropサポート
+    "isolatedModules": true, // 各ファイルを独立したモジュールとして扱う（BabelやNext.js向け）
+    "allowJs": true, // .jsファイルのコンパイルを許可
+
+    "strict": true, // 厳密な型チェックを有効化（strictモード）
+    "skipLibCheck": true, // 型定義ファイル（.d.ts）のチェックをスキップ
+    "noUncheckedIndexedAccess": true, // インデックスアクセス（obj[key]）に対して未定義チェックを行う
+    "noPropertyAccessFromIndexSignature": true, // インデックスシグネチャ経由のプロパティアクセスを禁止
+    "noImplicitReturns": true, // すべての関数でreturn文の型整合性をチェック
+    "forceConsistentCasingInFileNames": true, // ファイル名の大文字小文字の不一致をエラーにする（クロスOS対応）
+
+    "noEmit": true, // コンパイル結果を出力しない（Next.jsやBabelを使う場合）
+    "removeComments": true, // 出力するJavaScriptからコメントを削除
+    "declaration": true, // 型定義ファイル（.d.ts）の出力を有効化
+    "newLine": "lf", // 出力時の改行コードをLFに統一
+    "incremental": true, // インクリメンタルビルドを有効化（ビルドキャッシュを利用）
+
+    "plugins": [{ "name": "next" }] // Next.js用プラグイン設定
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "**/*.test.tsx", "vitest.config.mts"],
   "exclude": ["node_modules"]

@@ -10,7 +10,7 @@ export const messageHandlers = [
   http.get(endpoint.messageDetail, async ({ request, params }) => {
     await networkDelay();
 
-    const storeId = params.storeId as string;
+    const storeId = params["storeId"] as string;
     const user = await db.user.findFirst({
       where: {},
     });
@@ -37,7 +37,7 @@ export const messageHandlers = [
   http.post(endpoint.messageDetail, async ({ request, params }) => {
     await networkDelay();
 
-    const storeId = params.storeId as string;
+    const storeId = params["storeId"] as string;
     const user = await db.user.findFirst({
       where: {},
     });
